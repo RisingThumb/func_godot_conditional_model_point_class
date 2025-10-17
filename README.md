@@ -16,6 +16,9 @@ When you have set these values as you see fit, you can press the Attach Conditio
 These conditional models will only show the model conditionally within Trenchbroom. It is still up to you to change the model to the correct mesh or scene whenever your map builds.
 
 As an example:
+
 ![Class image](./conditionalclassimg.png)
+
 Then in Trenchbroom, I can set model_id key for the model I want, set the scale key and voila:
+
 ![Trenchbroom image](./tbimg.png)
