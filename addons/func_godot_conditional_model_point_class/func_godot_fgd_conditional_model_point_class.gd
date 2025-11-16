@@ -15,8 +15,8 @@ class_name FuncGodotFGDConditionalModelPointClass extends FuncGodotFGDPointClass
 ## @tutorial(TrenchBroom Manual: Display Models for Entities): https://trenchbroom.github.io/manual/latest/#display-models-for-entities
 
 @export_tool_button("Attach Conditionals to metadata") var metadata_wrangle_action = metadata_wrangle
-@export var defaultModelPath: String = ""
-@export var conditionalStatements: Dictionary[String, String]
+@export var defaultModelPath: ModelDescriptor = null
+@export var conditionalStatements: Dictionary[String, ModelDescriptor]
 @export var modelScaleMultiplier: int = 32;
 @export var multiplyByScaleKey: bool = true
 
@@ -32,12 +32,15 @@ func metadata_wrangle() -> void:
 	if conditionalStatements:
 		modelSwitcher += ""
 		for conditionalStatement in conditionalStatements.keys():
-			modelSwitcher += conditionalStatement + ' -> { "path": "'+conditionalStatements[conditionalStatement]+'", '+scaleExpr+' }, '
-		if defaultModelPath == "":
+			var modelDescriptor: ModelDescriptor = conditionalStatements.get(conditionalStatement)
+			if !modelDescriptor:
+				continue
+			modelSwitcher += conditionalStatement + ' -> { "path": "'+modelDescriptor.path+'", "frame":'+str(modelDescriptor.frame)+', "skin":'+str(modelDescriptor.skin)+', '+scaleExpr+' }, '
+		if !defaultModelPath:
 			modelSwitcher = modelSwitcher.trim_suffix(", ")
 	
-	if defaultModelPath != "":
-		modelSwitcher += '{"path": "'+defaultModelPath+'", '+scaleExpr+' }'
+	if defaultModelPath:
+		modelSwitcher += '{ "path": "'+defaultModelPath.path+'", "frame":'+str(defaultModelPath.frame)+', "skin":'+str(defaultModelPath.skin)+', '+scaleExpr+' }'
 		
 	if conditionalStatements or defaultModelPath:
 		modelSwitcher += " }}"
