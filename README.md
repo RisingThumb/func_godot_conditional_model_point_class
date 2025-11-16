@@ -4,10 +4,15 @@ This is a helper resource to be used with func_godot. Without func_godot this wi
 
 This resource has 4 properties on top of the default FuncGodotFGDPointClass properties:
 
-- Default Model Path (String) (optional): The default path for the model for this path. Leave blank if you do not want a default model.
-- Conditional statements (Dictionary[String, String]) (Optional): A dictionary where the keys are the conditional statements and the values are the model paths.
+- Default Model Path (ModelDescriptor) (optional): The default path for the model for this path. Leave blank if you do not want a default model.
+- Conditional statements (Dictionary[String, ModelDescriptor]) (Optional): A dictionary where the keys are the conditional statements and the values are the model paths.
 - Model Scale Multiplier (Integer): The default scale of the model. If multiply by scale key is ticked, this value will be multiplied by the scale key.
 - Multiply By Scale Key (Bool): Whether to multiply by the scale key that the entity has. This means if you use a scale of 1.2, visually within Trenchbroom, the model will be scaled by 1.2.
+
+Model Descriptor has 3 parameters
+- Path (String): The path to the model that is used
+- Frame (int): The integer for the frame of the model. When using a gltf model, this depends on the order of animations in that gltf file, and will index that. The first frame is displayed.
+- Skin (int): The integer for the skin of the model. Not 100% sure how this is used for gltf files, but it's there if you need it.
 
 All file paths are relative to the game folder you set in Trenchbroom.
 
