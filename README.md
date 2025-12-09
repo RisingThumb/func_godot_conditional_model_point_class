@@ -1,3 +1,6 @@
+# func_godot now supports this style of conditional model point class stuff
+Avoid using this
+
 # func_godot_conditional_model_point_class
 
 This is a helper resource to be used with func_godot. Without func_godot this will not work!
